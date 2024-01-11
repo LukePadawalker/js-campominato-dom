@@ -1,0 +1,61 @@
+/*  generics */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Properties */
+
+:root{
+    --cols-per-row: 10;
+}
+
+
+
+p{
+    margin-bottom: 0;
+}
+
+
+header{
+
+    width: 100%;
+    height: 100px;
+}
+
+.img{
+    display: inline-block;
+    max-height: 100px;
+}
+
+section{
+    background-color: aquamarine;
+    width: 100%;
+    height: calc(100vh - 150px);
+    overflow: scroll;
+}
+
+.grid{
+    width: 700px;
+    height: 700px;
+}
+
+.cell{
+    width: calc(100% / var(--cols-per-row));
+    height: calc(100% / var(--cols-per-row));
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+
+.cell.clicked{
+    background-color: rgb(71, 172, 255);
+}
+
+
+footer{
+    width: 100%;
+    height: 50px;
+}
