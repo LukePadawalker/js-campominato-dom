@@ -13,21 +13,20 @@
 }
 
 
-
 p{
     margin-bottom: 0;
 }
 
-
 header{
-
     width: 100%;
     height: 100px;
+
 }
 
 .img{
     display: inline-block;
     max-height: 100px;
+
 }
 
 section{
@@ -35,11 +34,13 @@ section{
     width: 100%;
     height: calc(100vh - 150px);
     overflow: scroll;
+
 }
 
 .grid{
     width: 700px;
     height: 700px;
+
 }
 
 .cell{
@@ -47,15 +48,18 @@ section{
     height: calc(100% / var(--cols-per-row));
     border: 1px solid black;
     cursor: pointer;
+
 }
 
 
 .cell.clicked{
     background-color: rgb(71, 172, 255);
+
 }
 
 
 footer{
     width: 100%;
     height: 50px;
+    
 }
