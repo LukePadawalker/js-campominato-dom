@@ -9,48 +9,45 @@ console.log("JS OK");
 const grid = document.getElementById('grid');
 const button = document.getElementById('button');
 const selector = document.getElementById('selector');
+const scoreContainer = document.getElementById('score');
 
 
 // valori iniziali
 let rows;
 let cols;
-
-selector.addEventListener('change', function(){
-    
-    let selectorValue = selector.value;
-    console.log(selectorValue);
-    switch(selectorValue){
-        case "medium":
-            rows = 9;
-            cols = 9;
-            break;
-        case "hard":
-            rows = 7;
-            cols = 7;
-            break;
-        default:
-            rows = 10;
-            cols = 10;
-            break;
-                    
-    }
-    console.log(rows);
-    console.log(cols);
-                
-                
-    const numOfRows = document.querySelector(':root');
-    const setnumOfRows = () => {
-        numOfRows.style.setProperty('--cols-per-row', cols);
-        return setnumOfRows;
-                  
-    }
-                
-})
+const maxBombs = 16;
 
 
-// funzioni
+let selectorValue = selector.value;
+
+console.log(selectorValue);
+switch (selectorValue){
+    case "medium":
+        rows = 9;
+        cols = 9;
+        break;
+    case "hard":
+        rows = 7;
+        cols = 7;
+        break;
+    default:
+        rows = 10;
+        cols = 10;
+        break;
             
-// crea una cella
+}
+
+let totalCells = rows * cols;
+
+      
+        
+const numOfRows = document.querySelector(':root');
+const setnumOfRows = () => {
+    numOfRows.style.setProperty('--cols-per-row', cols);
+    return setnumOfRows;
+              
+}  
+
 
 const createCell = () => {
     const cell = document.createElement('div');
@@ -59,49 +56,84 @@ const createCell = () => {
     return cell;
 }
 
-
-let totalCells = rows * cols;
-
 // svolgimento
 
 // creiamo una variabile falsa di default
 let gridExist = false;
 
+const arrayBombs = () =>{
+
+    let array = [];
+    for(i = 0;array.length < maxBombs; i++){
+        const randomNum = Math.floor(Math.random() * 100) + 1;
+        console.log(randomNum);
+
+        if (!array.includes(randomNum)){
+            array.push(randomNum);
+        }
+
+        console.log(array);
+    }
+    return array;
+    console.log(array);
+
+}
+arrayBombs();
+
 button.addEventListener('click', function(){
 
-    console.log(totalCells);
 
-    for(let i = 0; i < totalCells; i++){
-
-        // variabili
-        const newCell = createCell();        
-
-        // creiamo il contenitore per il numero
-        cellContainer = document.createElement('h5');
-
-
-        //inseriamo il numero dentro il contenitore
-        numInCell = i + 1;
-        cellContainer.textContent = numInCell;
-
-
-        // inseriamo il contenitore dentro la cella
-        newCell.appendChild(cellContainer);
+    if (gridExist == false){
         
+            
+        for(let i = 0; i < totalCells; i++){
+    
+            // variabili
+            const newCell = createCell();    
+            let score = 0;
+    
+            // creiamo il contenitore per il numero
+            const cellContainer = document.createElement('h5');
+    
+    
+            // inseriamo il numero dentro il contenitore
+            numInCell = i + 1;
+            cellContainer.textContent = numInCell;            
 
-        // inseriamo la cella dentro la griglia
-        grid.appendChild(newCell);
-
-        // coloriamo la cella di blu
-        newCell.addEventListener('click', () => {
-
-            newCell.classList.add("clicked");
-            console.log(newCell.innerText);
-
-            // coloriamola di rosso se contiene una bomba
+    
+            // inseriamo il contenitore dentro la cella
+            newCell.appendChild(cellContainer);
+            
+    
+            // inseriamo la cella dentro la griglia
+            grid.appendChild(newCell);
 
 
-        })
+            // coloriamo la cella di blu
+            newCell.addEventListener('click', () => {
+
+                newCell.classList.add("clicked");
+                console.log(newCell.innerText);
+
+                // aumentiamo il punteggio di 1
+                score = score + 1;
+                console.log(score);
+                
+                // coloriamola di rosso se contiene una bomba
+                if (arrayBombs().includes(numInCell)){
+                    console.log("hai cliccato una bomba")
+                }
+                console.log(numInCell);
+                
+                
+            })
+            
+            
+        }
+        
+        // inseriamo il punteggio dentro il contenitore
+        scoreContainer.textContent = score;
+        
 
 
         // facciamo si che il bottone play generi una sola griglia
@@ -111,6 +143,15 @@ button.addEventListener('click', function(){
 
 
 });
+
+
+
+selector.addEventListener('submit',function(event){
+    event.preventDefault;
+})
+
+
+
 
 
 
