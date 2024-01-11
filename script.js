@@ -59,28 +59,34 @@ const createCell = () => {
 // svolgimento
 
 // creiamo una variabile falsa di default
-let gridExist = false;
 
-const arrayBombs = () =>{
-
+const bombsGenerator = () =>{
+    
     let array = [];
     for(i = 0;array.length < maxBombs; i++){
         const randomNum = Math.floor(Math.random() * 100) + 1;
         console.log(randomNum);
-
+        
         if (!array.includes(randomNum)){
             array.push(randomNum);
         }
-
+        
         console.log(array);
     }
     return array;
     console.log(array);
-
+    
 }
-arrayBombs();
+const arrayBombs = bombsGenerator();
 
+// let gridExist = false;
 button.addEventListener('click', function(){
+
+    button.innerText = "Ricomincia";
+
+    grid.innerText = " ";
+
+
 
 
     if (gridExist == false){
@@ -115,14 +121,23 @@ button.addEventListener('click', function(){
                 newCell.classList.add("clicked");
                 console.log(newCell.innerText);
 
+                if (newCell.classList.contains('clicked')) return;
+
                 // aumentiamo il punteggio di 1
-                score = score + 1;
-                console.log(score);
                 
                 // coloriamola di rosso se contiene una bomba
                 if (arrayBombs().includes(numInCell)){
                     console.log("hai cliccato una bomba")
+                    newCell.classList.add("clicked-bomb");
+                    
+                }else{
+                    score = score + 1;
+                    console.log("hai clicato una cella valida")
+                    console.log(score);
+
                 }
+
+
                 console.log(numInCell);
                 
                 
